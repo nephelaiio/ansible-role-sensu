@@ -1,0 +1,26 @@
+---
+sensu_packages:
+  - sensu
+
+sensu_package_names: "{{ sensu_packages }}"
+
+sensu_packages_state: present
+
+sensu_package_state: "{{ sensu_packages_state }}"
+
+# sensu_conf_template: sensu.conf
+
+# sensu_conf_path: /etc/sensu/sensu.conf
+
+sensu_service_names:
+  - sensu
+
+sensu_service_status: started
+
+sensu_service_enabled: yes
+
+sensu_rabbitmq_vhost: sensu
+
+sensu_user_name: sensu
+
+sensu_user_pass: changeme

@@ -1,0 +1,29 @@
+---
+galaxy_info:
+  author: Ted Cook
+  description: An Ansible role to install and configure sensu
+  license: MIT
+  min_ansible_version: 2.2
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Archlinux
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: Debian
+      versions:
+        - stretch
+  galaxy_tags:
+    - sensu
+
+dependencies:
+  - src: nephelaiio.rabbitmq
+    version: 1.0.0
+    vars:
+      rabbitmq_vhost: "{{ sensu_rabbitmq_vhost }}"
+      rabbitmq_user_name: "{{ sensu_user_name }}"
+      rabbitmq_user_pass: "{{ sensu_user_pass }}"

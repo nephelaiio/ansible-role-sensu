@@ -1,0 +1,7 @@
+---
+# - name: restart sensu
+#   become: yes
+#   service:
+#     name: "{{ item }}"
+#     state: restarted
+#   with_items: "{{ sensu_service_names }}"
