@@ -10,46 +10,63 @@
   tags:
     - sensu
 
+- name: install dependencies
+  become: yes
+  package: 
+    name: apt-transport-https
+  when: ansible_os_family == 'Debian'
+    
 - name: install apt key
   become: yes
   changed_when: false
   apt_key:
     url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
-    repo: "https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main"
   when: ansible_os_family == 'Debian'
 
 - name: install apt repo
   become: yes
   apt_repository:
     filename: sensu
-    repo: "https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main"
+    repo: "deb https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main"
+    update_cache: yes
   when: ansible_os_family == 'Debian'
 
 - name: install yum repo
   become: yes
   yum_repository:
-    filename: sensu
+    name: sensu
+    description: sensu app repository
     baseurl: "https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/"
+    gpgcheck: 0
   when: ansible_os_family == 'RedHat'
 
-- name: install sensu packages
+- name: install packages
   become: yes
   package:
     name: "{{ item }}"
     state: "{{ sensu_package_state }}"
   with_items: "{{ sensu_package_names }}"
 
-# - name: configure sensu
-#   become: yes
-#   template:
-#     src: "{{ sensu_conf_template }}"
-#     dest: "{{ sensu_conf_path }}"
-#   notify:
-#     - restart sensu
-#
-# - name: manage sensu services
-#   become: yes
-#   service:
-#     name: "{{ item }}"
-#     state: "{{ sensu_service_status }}"
-#   with_items: "{{ sensu_service_names }}"
+- name: create configuration directories
+  become: yes
+  file:
+    path: "{{ item | dirname }}"
+    state: directory
+  with_items: "{{ sensu_conf_files }}"
+
+- name: manage configuration packages
+  become: yes
+  template:
+    src: "{{ item | basename }}.j2"
+    dest: "{{ item }}"
+  with_items: "{{ sensu_conf_files }}"
+  notify:
+    - restart sensu
+
+- name: manage services
+  become: yes
+  service:
+    name: "{{ item }}"
+    state: "{{ sensu_service_status }}"
+    enabled: "{{ sensu_service_enabled }}"
+  with_items: "{{ sensu_service_names }}"

@@ -22,8 +22,10 @@ galaxy_info:
 
 dependencies:
   - src: nephelaiio.rabbitmq
-    version: 1.0.0
+    version: 1.0.1
     vars:
       rabbitmq_vhost: "{{ sensu_rabbitmq_vhost }}"
-      rabbitmq_user_name: "{{ sensu_user_name }}"
-      rabbitmq_user_pass: "{{ sensu_user_pass }}"
+      rabbitmq_user_name: "{{ sensu_rabbitmq_user_name }}"
+      rabbitmq_user_pass: "{{ sensu_rabbitmq_user_pass }}"
+  - src: geerlingguy.redis
+    version: 1.5.1

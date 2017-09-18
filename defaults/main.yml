@@ -8,9 +8,12 @@ sensu_packages_state: present
 
 sensu_package_state: "{{ sensu_packages_state }}"
 
-# sensu_conf_template: sensu.conf
+sensu_conf_files:
+  - /etc/sensu/conf.d/client.json
+  - /etc/sensu/conf.d/transport.json
+  - /etc/sensu/conf.d/api.json
 
-# sensu_conf_path: /etc/sensu/sensu.conf
+sensu_conf_path: /etc/sensu/sensu.conf
 
 sensu_service_names:
   - sensu
@@ -19,8 +22,12 @@ sensu_service_status: started
 
 sensu_service_enabled: yes
 
+sensu_api_transport: rabbitmq
+
 sensu_rabbitmq_vhost: sensu
 
-sensu_user_name: sensu
+sensu_rabbitmq_user_name: sensu
 
-sensu_user_pass: changeme
+sensu_rabbitmq_user_pass: changeme
+
+sensu_uchiwa: no
