@@ -1,0 +1,26 @@
+---
+- name: create configuration directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: "{{ sensu_conf_files | map('dirname') | unique }}"
+
+- name: manage server configuration files
+  become: yes
+  template:
+    src: "{{ item | basename }}.j2"
+    dest: "{{ item }}"
+  with_items:
+    - "{{ sensu_server_conf_file }}"
+  notify:
+    - restart sensu server
+
+- name: manage server services
+  become: yes
+  service:
+    name: "{{ item }}"
+    state: "{{ sensu_service_status }}"
+    enabled: "{{ sensu_service_enabled }}"
+  with_items:
+    - "{{ sensu_server_service_name }}"

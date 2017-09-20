@@ -34,8 +34,18 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+  inventory:
+    host_vars:
+      arch:
+        sensu_master: true
+      centos:
+        sensu_master: true
+      debian:
+        sensu_master: true
+      ubuntu:
+        sensu_master: true
 scenario:
-  name: default
+  name: master
 verifier:
   name: testinfra
   lint:

@@ -21,11 +21,30 @@ galaxy_info:
     - sensu
 
 dependencies:
-  - src: nephelaiio.rabbitmq
-    version: 1.0.1
+  - role: nephelaiio.rabbitmq
+    version: 1.0.2
     vars:
       rabbitmq_vhost: "{{ sensu_rabbitmq_vhost }}"
       rabbitmq_user_name: "{{ sensu_rabbitmq_user_name }}"
       rabbitmq_user_pass: "{{ sensu_rabbitmq_user_pass }}"
-  - src: geerlingguy.redis
+    when: sensu_master
+  - role: geerlingguy.redis
     version: 1.5.1
+    when: sensu_master
+  - role: franklinkim.users
+    version: 1.8.0
+    vars:
+      users:
+        - username: "{{ sensu_user_name }}"
+          home: "{{ sensu_user_home }}"
+          append: no
+          groups:
+            - "{{ sensu_user_group }}"
+          system: yes
+  - role: nephelaiio.rbenv
+    vars:
+      rbenv_user: "{{ sensu_user_name }}"
+      rbenv_gems:
+        - "{{ sensu_gem }}"
+      rbenv_ruby: "{{ sensu_ruby }}"
+    version: 1.0.3
