@@ -44,7 +44,21 @@ dependencies:
   - role: nephelaiio.rbenv
     vars:
       rbenv_user: "{{ sensu_user_name }}"
-      rbenv_gems:
-        - "{{ sensu_gem }}"
+      rbenv_gems: "{{ sensu_gems }}"
       rbenv_ruby: "{{ sensu_ruby }}"
     version: 1.0.3
+  - role: tumf.systemd-service
+    vars:
+      systemd_service_name: "{{ sensu-client }}"
+      systemd_service_Unit_Description: "Sensu Client"
+    version: 1.9
+  - role: tumf.systemd-service
+    vars:
+      systemd_service_name: "{{ sensu-server }}"
+      systemd_service_Unit_Description: "Sensu Server"
+    version: 1.9
+  - role: tumf.systemd-service
+    vars:
+      systemd_service_name: "{{ sensu-api }}"
+      systemd_service_Unit_Description: "Sensu API"
+    version: 1.9

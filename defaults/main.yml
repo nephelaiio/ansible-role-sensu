@@ -3,9 +3,18 @@ sensu_master: false
 
 sensu_ssl: false
 
-sensu_gem: sensu
+sensu_gems:
+  - sensu
 
-sensu_ruby: 2.4.1
+sensu_user_name: sensu
+
+sensu_user_home: /opt/sensu
+
+sensu_user_group: root
+
+sensu_ruby_version: 2.4.1
+
+sensu_ruby_path: "{{ sensu_user_home}}/embedded"
 
 sensu_rabbitmq_vhost: /sensu
 
@@ -33,8 +42,14 @@ sensu_port_redis: 6379
 
 sensu_transport: rabbitmq
 
-sensu_user_name: sensu
+sensu_service_client: sensu-client
 
-sensu_user_home: /opt/sensu
+sensu_service_server: sensu-server
 
-sensu_user_group: root
+sensu_service_api: sensu-api
+
+sensu_pid_dir: /var/run/sensu
+
+sensu_log_dir: /var/log/sensu
+
+sensu_log_level: info

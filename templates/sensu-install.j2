@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# WARNING: REQUIRES /bin/sh
+#
+# - must run on /bin/sh on solaris 9
+# - must run on /bin/sh on AIX 6.x
+# - if you think you are a bash wizard, you probably do not understand
+#   this programming language.  do not touch.
+# - if you are under 40, get peer review from your elders.
+#
+
+is_darwin()
+{
+  uname -v | grep "^Darwin" > /dev/null 2>&1
+}
+
+is_smartos()
+{
+  uname -v | grep "^joyent" > /dev/null 2>&1
+}
+
+is_aix()
+{
+  uname -a | grep "^AIX" > /dev/null 2>&1
+}
+
+is_freebsd()
+{
+  uname -v | grep "^FreeBSD" > /dev/null 2>&1
+}
+
+EMBEDDED_RUBY=true
+ETC_DIR=
+
+if is_freebsd; then
+  ETC_DIR=/usr/local/etc
+else
+  ETC_DIR=/etc
+fi
+
+if [ -f $ETC_DIR/default/sensu ]; then
+    . $ETC_DIR/default/sensu
+fi
+
+if [ -f $ETC_DIR/default/sensu-install ]; then
+    . $ETC_DIR/default/sensu-install
+fi
+
+if [ $EMBEDDED_RUBY = "true" ]; then
+    export PATH={{ sensu_ruby_path }}/bin:$PATH
+    export GEM_PATH={{ sensu_ruby_path }}/lib/ruby/gems/2.4.0:$GEM_PATH
+fi
+
+{{ sensu_ruby_path }}/bin/sensu-install $@
