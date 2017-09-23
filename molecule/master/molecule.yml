@@ -6,30 +6,30 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: centos
-    image: centos/systemd:latest
-    privileged: True
-    command: /usr/sbin/init
-    volume_mounts:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+#  - name: centos
+#    image: centos/systemd:latest
+#    privileged: True
+#    command: /usr/sbin/init
+#    volume_mounts:
+#      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: ubuntu
     image: solita/ubuntu-systemd:latest
-    privileged: True
-    command: /sbin/init
-    volume_mounts:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: debian
-    image: debian:stretch
-    privileged: True
-    command: /sbin/init
-    volume_mounts:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: arch
-    image: base/archlinux:latest
-    privileged: True
-    command: /usr/sbin/init
-    volume_mounts:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+#    privileged: True
+#    command: /sbin/init
+#    volume_mounts:
+#      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+#  - name: debian
+#    image: debian:stretch
+#    privileged: True
+#    command: /sbin/init
+#    volume_mounts:
+#      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+#  - name: arch
+#    image: base/archlinux:latest
+#    privileged: True
+#    command: /usr/sbin/init
+#    volume_mounts:
+#      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
 provisioner:
   name: ansible
   lint:
@@ -37,13 +37,13 @@ provisioner:
   inventory:
     host_vars:
       arch:
-        sensu_master: true
+        sensu_server: true
       centos:
-        sensu_master: true
+        sensu_server: true
       debian:
-        sensu_master: true
+        sensu_server: true
       ubuntu:
-        sensu_master: true
+        sensu_server: true
 scenario:
   name: master
 verifier:

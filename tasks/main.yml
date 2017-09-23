@@ -1,1 +1,87 @@
 ---
+- name: create sensu directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_user_group }}"
+  with_items:
+    - "{{ sensu_user_home }}/bin"
+    - "{{ sensu_pid_dir }}"
+    - "{{ sensu_log_dir }}"
+    - "{{ sensu_conf_root }}"
+    - "{{ sensu_conf_dir }}"
+  become: yes
+
+- name: create install bin helper
+  template:
+    src: sensu-install.j2
+    dest: "{{ sensu_user_home }}/bin/sensu-install"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_user_group }}"
+    mode: 0755
+  become: yes
+
+- name: create server bin helper
+  template:
+    src: sensu-service.j2
+    dest: "{{ sensu_user_home }}/bin/sensu-service"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_user_group }}"
+    mode: 0755
+  become: yes
+
+- name: create systemd service units
+  template:
+    src: systemd.service.j2
+    dest: "/etc/systemd/system/sensu-{{ service }}.service"
+  vars:
+    service: "{{ item }}"
+  with_items:
+    - client
+    - server
+    - api
+  become: yes
+  notify: reload systemd
+
+- name: manage client configuration
+  template:
+    src: "{{ item }}.json.j2"
+    dest: "{{ sensu_conf_dir }}/{{ item }}.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_user_group }}"
+  with_items:
+    - client
+  become: yes
+
+- name: manage server configuration
+  template:
+    src: "{{ item }}.json.j2"
+    dest: "{{ sensu_conf_dir }}/{{ item }}.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_user_group }}"
+  with_items:
+    - server
+    - rabbitmq
+    - redis
+    - api
+  become: yes
+  when: sensu_server
+
+- name: manage client service
+  systemd:
+    name: sensu-client
+    state: "{{ sensu_service_state }}"
+    enabled: "{{ sensu_service_enabled }}"
+  become: yes
+
+- name: manage master services
+  systemd:
+    name: "{{ item }}"
+    state: "{{ sensu_service_state }}"
+    enabled: "{{ sensu_service_enabled }}"
+  with_items:
+    - sensu-api
+    - sensu-server
+  become: yes
+  when: sensu_master

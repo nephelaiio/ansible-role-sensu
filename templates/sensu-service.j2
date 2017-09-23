@@ -67,7 +67,7 @@ fi
 
 cd $INSTALLER_DIR
 
-svc_exec="/opt/sensu/bin/$sensu_service"
+svc_exec="{{ sensu_user_home }}/bin/$sensu_service"
 
 logfile=$LOG_DIR/$sensu_service.log
 pidfile=$PID_DIR/$sensu_service.pid
@@ -87,8 +87,8 @@ ensure_dir() {
 
 set_sensu_paths() {
     if [ "x$EMBEDDED_RUBY" = "xtrue" ]; then
-        PATH=$INSTALLER_DIR/embedded/bin:$PATH:$PLUGINS_DIR:$HANDLERS_DIR
-        GEM_PATH=$INSTALLER_DIR/embedded/lib/ruby/gems/2.4.0:$GEM_PATH
+        PATH={{ sensu_ruby_path}}/bin:$PATH:$PLUGINS_DIR:$HANDLERS_DIR
+        GEM_PATH={{ sensu_ruby_path }}/lib/ruby/gems/{{ sensu_ruby_version}}:$GEM_PATH
         export PATH
         export GEM_PATH
     else

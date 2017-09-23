@@ -1,1 +1,6 @@
 ---
+- name: reload systemd
+  command: systemctl daemon-reload
+  become: yes
+  tags:
+    - skip_ansible_lint
