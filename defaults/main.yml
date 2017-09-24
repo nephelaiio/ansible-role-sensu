@@ -26,10 +26,6 @@ sensu_rabbitmq_user_name: sensu
 
 sensu_rabbitmq_user_pass: sensu
 
-sensu_redis_host: localhost
-
-sensu_redis_pass: sensu
-
 sensu_api_host: localhost
 
 sensu_api_port: 4567
@@ -54,7 +50,7 @@ sensu_service_server: sensu-server
 
 sensu_service_api: sensu-api
 
-sensu_service_state: running
+sensu_service_state: started
 
 sensu_service_enabled: true
 
