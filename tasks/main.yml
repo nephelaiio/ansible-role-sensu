@@ -5,6 +5,7 @@
     path: "{{ item }}"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_user_group }}"
+    mode: 0755
   with_items:
     - "{{ sensu_user_home }}/bin"
     - "{{ sensu_pid_dir }}"
@@ -84,4 +85,4 @@
     - sensu-api
     - sensu-server
   become: yes
-  when: sensu_master
+  when: sensu_server

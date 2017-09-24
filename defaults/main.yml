@@ -12,7 +12,7 @@ sensu_user_home: /opt/sensu
 
 sensu_user_group: root
 
-sensu_ruby_version: 2.4.1
+sensu_ruby_version: 2.4.0
 
 sensu_ruby_path: "{{ sensu_user_home}}/embedded"
 

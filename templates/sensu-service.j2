@@ -67,7 +67,7 @@ fi
 
 cd $INSTALLER_DIR
 
-svc_exec="{{ sensu_user_home }}/bin/$sensu_service"
+svc_exec="{{ sensu_user_home }}/embedded/bin/$sensu_service"
 
 logfile=$LOG_DIR/$sensu_service.log
 pidfile=$PID_DIR/$sensu_service.pid

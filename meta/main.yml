@@ -33,6 +33,7 @@ dependencies:
     when: sensu_server
   - role: franklinkim.users
     version: 1.8.0
+    become: yes
     vars:
       users:
         - username: "{{ sensu_user_name }}"
@@ -42,9 +43,9 @@ dependencies:
             - "{{ sensu_user_group }}"
           system: yes
   - role: nephelaiio.rbenv
+    version: 1.0.9
     vars:
       rbenv_user: "{{ sensu_user_name }}"
       rbenv_gems: "{{ sensu_gems }}"
       rbenv_ruby: "{{ sensu_ruby_version }}"
-      rbenv_ruby_home: "{{ sensu_ruby_path }}"
-    version: 1.0.8
+      rbenv_ruby_path: "{{ sensu_ruby_path }}"
