@@ -1,7 +1,7 @@
 # nephelaiio.sensu
 
 [![Build Status](https://travis-ci.org/nephelaiio/ansible-role-sensu.svg?branch=master)](https://travis-ci.org/nephelaiio/ansible-role-sensu)
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-systemd--service-blue.svg)](https://galaxy.ansible.com/nephelaiio/sensu/)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nephelaiio.sensu-blue.svg)](https://galaxy.ansible.com/nephelaiio/sensu/)
 
 An [ansible role](https://galaxy.ansible.com/nephelaiio/sensu) to install and configure sensu services from gem packages. This is a workaround for [Sensu Issue 1676](https://github.com/sensu/sensu/issues/1676)
 
