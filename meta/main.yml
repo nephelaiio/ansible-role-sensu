@@ -27,10 +27,14 @@ dependencies:
       rabbitmq_vhost: "{{ sensu_rabbitmq_vhost }}"
       rabbitmq_user_name: "{{ sensu_rabbitmq_user_name }}"
       rabbitmq_user_pass: "{{ sensu_rabbitmq_user_pass }}"
-    when: sensu_server
+    when:
+      - sensu_rabbitmq
+      - sensu_server
   - role: geerlingguy.redis
     version: 1.5.1
-    when: sensu_server
+    when:
+      - sensu_redis
+      - sensu_server
   - role: franklinkim.users
     version: 1.8.0
     become: yes

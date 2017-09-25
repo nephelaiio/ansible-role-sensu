@@ -8,9 +8,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 user_name = 'sensu'
 user_group = 'sensu'
 user_home = '/opt/sensu'
-user_rbenv = '{0}/.rbenv'.format(user_home)
-ruby_version = '2.4.1'
-ruby_bin = '{0}/versions/{1}/bin/ruby'.format(user_rbenv, ruby_version)
+user_rbenv = '{0}/embedded'.format(user_home)
+ruby_bin = '{0}/bin/ruby'.format(user_rbenv)
 
 
 def test_user(host):
@@ -27,3 +26,8 @@ def test_rbenv(host):
     assert host.file(ruby_bin).is_file
     with host.sudo(user_name):
         host.run('{0} --version'.format(ruby_bin)).rc == 0
+
+
+def test_sensu(host):
+    assert host.service('sensu-client').is_running
+    assert host.service('sensu-client').is_enabled
