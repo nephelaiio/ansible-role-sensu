@@ -13,7 +13,6 @@ install:
 
 script:
   - molecule test -s default && molecule test -s server
-  - molecule test -s server
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
