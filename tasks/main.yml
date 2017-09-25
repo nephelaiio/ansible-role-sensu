@@ -54,6 +54,7 @@
   with_items:
     - client
   become: yes
+  when: not sensu_server
 
 - name: manage server configuration
   template:
@@ -63,9 +64,6 @@
     group: "{{ sensu_user_group }}"
   with_items:
     - server
-    - rabbitmq
-    - redis
-    - api
   become: yes
   when: sensu_server
 
