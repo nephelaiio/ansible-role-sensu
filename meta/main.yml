@@ -30,9 +30,9 @@ dependencies:
     when:
       - sensu_rabbitmq
       - sensu_server
-  - role: geerlingguy.redis
+  - role: DavidWittman.redis
     vars:
-      redis_bind_interface: "{{ sensu_redis_host }}"
+      redis_bind: "{{ sensu_redis_host }}"
       redis_port: "{{ sensu_redis_port }}"
     version: 1.5.1
     when:
