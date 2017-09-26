@@ -1,6 +1,6 @@
 ---
-- src: nephelaiio.rabbitmq
-- src: DavidWittman.redis
-- src: nephelaiio.rbenv
-- src: franklinkim.users
-- src: tumf.systemd-service
+- nephelaiio.rabbitmq
+- DavidWittman.redis
+- nephelaiio.rbenv
+- franklinkim.users
+- tumf.systemd-service
