@@ -1,6 +1,6 @@
 ---
 - nephelaiio.rabbitmq
-- DavidWittman.redis
+- geerlingguy.redis
 - nephelaiio.rbenv
 - franklinkim.users
 - tumf.systemd-service
