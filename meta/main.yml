@@ -35,6 +35,7 @@ dependencies:
       redis_bind: "{{ sensu_redis_host }}"
       redis_port: "{{ sensu_redis_port }}"
     version: 1.2.4
+    become: yes
     when:
       - sensu_redis
       - sensu_server
