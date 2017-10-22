@@ -67,6 +67,16 @@
   become: yes
   when: sensu_server
 
+- name: manage systemd tmpfiles
+  template:
+    src: systemd-tmpfiles.conf.j2
+    dest: /usr/lib/tmpfiles.d/sensu.conf
+  vars:
+    pid_dir: "{{ sensu_pid_dir }}"
+    user_name: "{{ sensu_user_name }}"
+    user_group: "{{ sensu_user_group }}"
+  become: yes
+
 - name: manage client service
   systemd:
     name: sensu-client

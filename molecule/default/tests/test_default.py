@@ -10,6 +10,7 @@ user_group = 'sensu'
 user_home = '/opt/sensu'
 user_rbenv = '{0}/embedded'.format(user_home)
 ruby_bin = '{0}/bin/ruby'.format(user_rbenv)
+run_dir = '/var/run/sensu'
 
 
 def test_user(host):
@@ -31,3 +32,6 @@ def test_rbenv(host):
 def test_sensu(host):
     assert host.service('sensu-client').is_running
     assert host.service('sensu-client').is_enabled
+    assert host.file(run_dir).exists
+    assert host.file(run_dir).is_directory
+    assert host.file(run_dir).user == user_name
