@@ -40,7 +40,7 @@ dependencies:
       - sensu_redis
       - sensu_server
   - role: franklinkim.users
-    version: 1.8.0
+    version: 1.9.1
     become: yes
     vars:
       users:
