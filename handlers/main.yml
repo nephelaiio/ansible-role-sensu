@@ -4,3 +4,18 @@
   become: yes
   tags:
     - skip_ansible_lint
+
+- name: manage client service
+  systemd:
+    name: sensu-client
+    state: restarted
+  become: yes
+
+- name: restart master services
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  become: yes
+  with_items:
+    - sensu-api
+    - sensu-server

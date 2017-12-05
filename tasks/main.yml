@@ -54,6 +54,7 @@
   with_items:
     - client
   become: yes
+  notify: restart client service
   when: not sensu_server
 
 - name: manage server configuration
@@ -65,6 +66,7 @@
   with_items:
     - server
   become: yes
+  notify: restart master services
   when: sensu_server
 
 - name: manage systemd tmpfiles
