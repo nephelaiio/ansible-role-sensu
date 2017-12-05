@@ -30,8 +30,6 @@ sensu_rabbitmq_user_pass: sensu
 
 sensu_redis: true
 
-sensu_redis_host: 127.0.0.1
-
 sensu_redis_port: 6379
 
 sensu_service_client: sensu-client
@@ -54,21 +52,23 @@ sensu_conf_client:
     address: "{{ ansible_default_ipv4.address }}"
     subscriptions: []
 
-sensu_conf_server:
-  api:
-    host: localhost
-    port: 4567
-    user: sensu
-    password: sensu
-  redis:
-    host: "{{ sensu_redis_host }}"
-    port: "{{ sensu_redis_port }}"
+sensu_conf_common:
   rabbitmq:
     host: "{{ sensu_rabbitmq_host }}"
     port: "{{ sensu_rabbitmq_port }}"
     vhost: "{{ sensu_rabbitmq_vhost }}"
     user: "{{ sensu_rabbitmq_user_name }}"
     password: "{{ sensu_rabbitmq_user_pass }}"
+  api:
+    host: "{{ sensu_api_host | default('localhost') }}"
+    port: "{{ sensu_api_port | default(4567) }}"
+    user: "{{ sensu_api_user | default('sensu') }}"
+    password: "{{ sensu_api_pass | default('sensu') }}"
+
+sensu_conf_server:
+  redis:
+    host: "{{ sensu_redis_host | default('localhost') }}"
+    port: "{{ sensu_redis_port }}"
 
 sensu_pid_dir: /var/run/sensu
 

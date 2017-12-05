@@ -45,26 +45,38 @@
   become: yes
   notify: reload systemd
 
-- name: manage client configuration
+- name: manage common configuration
   template:
-    src: "{{ item }}.json.j2"
-    dest: "{{ sensu_conf_dir }}/{{ item }}.json"
+    src: conf.json.j2
+    dest: "{{ sensu_conf_dir }}/common.json"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_user_group }}"
-  with_items:
-    - client
+  vars:
+    sensu_conf: "{{ sensu_conf_common }}"
+  become: yes
+  notify:
+    - restart client service
+    - restart server service
+  when: not sensu_server
+
+- name: manage client configuration
+  template:
+    src: conf.json.j2
+    dest: "{{ sensu_conf_dir }}/client.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_user_group }}"
+  vars:
+    sensu_conf: "{{ sensu_conf_client }}"
   become: yes
   notify: restart client service
   when: not sensu_server
 
 - name: manage server configuration
   template:
-    src: "{{ item }}.json.j2"
+    src: conf.json.j2
     dest: "{{ sensu_conf_dir }}/{{ item }}.json"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_user_group }}"
-  with_items:
-    - server
   become: yes
   notify: restart master services
   when: sensu_server

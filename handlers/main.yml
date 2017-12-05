@@ -10,6 +10,7 @@
     name: sensu-client
     state: restarted
   become: yes
+  when: not sensu_server
 
 - name: restart master services
   systemd:
@@ -19,3 +20,4 @@
   with_items:
     - sensu-api
     - sensu-server
+  when: sensu_server
