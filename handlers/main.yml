@@ -5,7 +5,7 @@
   tags:
     - skip_ansible_lint
 
-- name: manage client service
+- name: restart client service
   systemd:
     name: sensu-client
     state: restarted
