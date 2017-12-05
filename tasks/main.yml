@@ -78,7 +78,7 @@
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_user_group }}"
   become: yes
-  notify: restart master services
+  notify: restart master service
   when: sensu_server
 
 - name: manage systemd tmpfiles
@@ -98,7 +98,7 @@
     enabled: "{{ sensu_service_enabled }}"
   become: yes
 
-- name: manage master services
+- name: manage master service
   systemd:
     name: "{{ item }}"
     state: "{{ sensu_service_state }}"
