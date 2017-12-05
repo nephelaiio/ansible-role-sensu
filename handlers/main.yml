@@ -12,7 +12,7 @@
   become: yes
   when: not sensu_server
 
-- name: restart master service
+- name: restart server service
   systemd:
     name: "{{ item }}"
     state: restarted

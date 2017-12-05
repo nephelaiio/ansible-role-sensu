@@ -16,11 +16,15 @@ sensu_ruby_version: 2.4.0
 
 sensu_ruby_path: "{{ sensu_user_home}}/embedded"
 
+sensu_redis_host: 127.0.0.1
+
+sensu_redis_port: 6379
+
 sensu_rabbitmq: true
 
 sensu_rabbitmq_host: localhost
 
-sensu_rabbitmq_port: 5671
+sensu_rabbitmq_port: 5672
 
 sensu_rabbitmq_vhost: /sensu
 
@@ -31,6 +35,8 @@ sensu_rabbitmq_user_pass: sensu
 sensu_redis: true
 
 sensu_redis_port: 6379
+
+sensu_api_port: 4567
 
 sensu_service_client: sensu-client
 
@@ -61,7 +67,7 @@ sensu_conf_common:
     password: "{{ sensu_rabbitmq_user_pass }}"
   api:
     host: "{{ sensu_api_host | default('localhost') }}"
-    port: "{{ sensu_api_port | default(4567) }}"
+    port: "{{ sensu_api_port }}"
     user: "{{ sensu_api_user | default('sensu') }}"
     password: "{{ sensu_api_pass | default('sensu') }}"
 

@@ -57,7 +57,6 @@
   notify:
     - restart client service
     - restart server service
-  when: not sensu_server
 
 - name: manage client configuration
   template:
@@ -74,9 +73,11 @@
 - name: manage server configuration
   template:
     src: conf.json.j2
-    dest: "{{ sensu_conf_dir }}/{{ item }}.json"
+    dest: "{{ sensu_conf_dir }}/server.json"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_user_group }}"
+  vars:
+    sensu_conf: "{{ sensu_conf_server }}"
   become: yes
   notify: restart master service
   when: sensu_server
