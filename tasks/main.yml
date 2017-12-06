@@ -56,7 +56,7 @@
   become: yes
   notify:
     - restart client service
-    - restart server service
+    - restart master service
 
 - name: manage client configuration
   template:
