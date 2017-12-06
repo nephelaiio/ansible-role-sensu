@@ -16,10 +16,6 @@ sensu_ruby_version: 2.4.0
 
 sensu_ruby_path: "{{ sensu_user_home}}/embedded"
 
-sensu_redis_host: 127.0.0.1
-
-sensu_redis_port: 6379
-
 sensu_rabbitmq: true
 
 sensu_rabbitmq_host: localhost
@@ -33,6 +29,8 @@ sensu_rabbitmq_user_name: sensu
 sensu_rabbitmq_user_pass: sensu
 
 sensu_redis: true
+
+sensu_redis_host: 127.0.0.1
 
 sensu_redis_port: 6379
 
