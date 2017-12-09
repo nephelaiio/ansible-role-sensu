@@ -32,7 +32,20 @@
     mode: 0755
   become: yes
 
-- name: create systemd service units
+- name: create systemd server service units
+  template:
+    src: systemd.service.j2
+    dest: "/etc/systemd/system/sensu-{{ service }}.service"
+  vars:
+    service: "{{ item }}"
+  with_items:
+    - server
+    - api
+  become: yes
+  when: sensu_server
+  notify: reload systemd
+
+- name: create systemd client service units
   template:
     src: systemd.service.j2
     dest: "/etc/systemd/system/sensu-{{ service }}.service"
@@ -40,9 +53,8 @@
     service: "{{ item }}"
   with_items:
     - client
-    - server
-    - api
   become: yes
+  when: sensu_server
   notify: reload systemd
 
 - name: manage common configuration
