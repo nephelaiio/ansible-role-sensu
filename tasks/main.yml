@@ -123,6 +123,7 @@
     state: "{{ sensu_service_state }}"
     enabled: "{{ sensu_service_enabled }}"
   become: yes
+  when: not sensu_server
 
 - name: manage master service
   systemd:
