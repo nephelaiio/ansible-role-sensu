@@ -14,7 +14,7 @@ sensu_user_group: root
 
 sensu_ruby_version: 2.4.0
 
-sensu_ruby_path: "{{ sensu_user_home}}/embedded"
+sensu_ruby_path: "{{ sensu_user_home }}/embedded"
 
 sensu_rabbitmq: true
 
@@ -73,6 +73,8 @@ sensu_conf_server:
   redis:
     host: "{{ sensu_redis_host | default('localhost') }}"
     port: "{{ sensu_redis_port }}"
+
+sensu_conf_checks: {}
 
 sensu_pid_dir: /var/run/sensu
 

@@ -82,6 +82,19 @@
   notify: restart master service
   when: sensu_server
 
+- name: manage check configuration
+  template:
+    src: conf.json.j2
+    dest: "{{ sensu_conf_dir }}/checks.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_user_group }}"
+  vars:
+    sensu_conf: "{{ sensu_conf_checks }}"
+  become: yes
+  notify:
+    - restart master service
+    - restart client service
+
 - name: manage systemd tmpfiles
   template:
     src: systemd-tmpfiles.conf.j2
