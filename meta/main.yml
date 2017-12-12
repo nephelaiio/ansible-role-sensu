@@ -21,6 +21,8 @@ galaxy_info:
     - sensu
 
 dependencies:
+  - role: nephelaiio.devtools
+    version: 1.0.6
   - role: nephelaiio.rabbitmq
     version: 1.0.2
     vars:
