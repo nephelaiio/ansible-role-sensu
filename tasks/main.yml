@@ -7,11 +7,23 @@
     group: "{{ sensu_user_group }}"
     mode: 0755
   with_items:
-    - "{{ sensu_user_home }}/bin"
+    - "{{ sensu_user_home }}"
     - "{{ sensu_pid_dir }}"
     - "{{ sensu_log_dir }}"
     - "{{ sensu_conf_root }}"
     - "{{ sensu_conf_dir }}"
+  become: yes
+
+- name: install ruby
+  package:
+    name:
+      - ruby
+      - ruby-dev
+  become: yes
+
+- name: install ruby gems
+  gem:
+    name: "{{ sensu_gems }}"
   become: yes
 
 - name: create install bin helper

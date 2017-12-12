@@ -1,6 +1,5 @@
 ---
 - nephelaiio.rabbitmq
 - geerlingguy.redis
-- nephelaiio.rbenv
 - franklinkim.users
 - tumf.systemd-service

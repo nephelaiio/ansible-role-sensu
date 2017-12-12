@@ -50,10 +50,3 @@ dependencies:
           groups:
             - "{{ sensu_user_group }}"
           system: yes
-  - role: nephelaiio.rbenv
-    version: 1.1.1
-    vars:
-      rbenv_user: "{{ sensu_user_name }}"
-      rbenv_gems: "{{ sensu_gems }}"
-      rbenv_ruby: "{{ sensu_ruby_version }}"
-      rbenv_ruby_path: "{{ sensu_ruby_path }}"

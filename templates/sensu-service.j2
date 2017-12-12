@@ -49,7 +49,7 @@ if is_freebsd; then
   ETC_DIR=/usr/local/etc
 fi
 
-INSTALLER_DIR={{ sensu_user_home }}
+SENSU_HOME={{ sensu_user_home }}
 CONFIG_DIR=$ETC_DIR/sensu
 CONFIG_FILE=$CONFIG_DIR/config.json
 CONFD_DIR=$CONFIG_DIR/conf.d
@@ -65,9 +65,9 @@ if [ -f $ETC_DIR/default/sensu ]; then
     . $ETC_DIR/default/sensu
 fi
 
-cd $INSTALLER_DIR
+cd $SENSU_HOME
 
-svc_exec="{{ sensu_user_home }}/embedded/bin/$sensu_service"
+svc_exec="/usr/local/bin/$sensu_service"
 
 logfile=$LOG_DIR/$sensu_service.log
 pidfile=$PID_DIR/$sensu_service.pid
@@ -86,15 +86,8 @@ ensure_dir() {
 }
 
 set_sensu_paths() {
-    if [ "x$EMBEDDED_RUBY" = "xtrue" ]; then
-        PATH={{ sensu_ruby_path}}/bin:$PATH:$PLUGINS_DIR:$HANDLERS_DIR
-        GEM_PATH={{ sensu_ruby_path }}/lib/ruby/gems/{{ sensu_ruby_version}}:$GEM_PATH
-        export PATH
-        export GEM_PATH
-    else
-        PATH=$PATH:$PLUGINS_DIR:$HANDLERS_DIR
-        export PATH
-    fi
+    PATH=$PATH:$PLUGINS_DIR:$HANDLERS_DIR
+    export PATH
 }
 
 validate() {

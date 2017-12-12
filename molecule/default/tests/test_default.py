@@ -8,8 +8,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 user_name = 'sensu'
 user_group = 'sensu'
 user_home = '/opt/sensu'
-user_rbenv = '{0}/embedded'.format(user_home)
-ruby_bin = '{0}/bin/ruby'.format(user_rbenv)
+ruby_bin = '/usr/local/bin/ruby'
 run_dir = '/var/run/sensu'
 
 
@@ -21,8 +20,6 @@ def test_user(host):
 
 
 def test_rbenv(host):
-    assert host.file(user_rbenv).exists
-    assert host.file(user_rbenv).is_directory
     assert host.file(ruby_bin).exists
     assert host.file(ruby_bin).is_file
     with host.sudo(user_name):
