@@ -16,14 +16,12 @@
 
 - name: install ruby
   package:
-    name:
-      - ruby
-      - ruby-dev
+    name: "{{ ruby_packages }}"
   become: yes
 
 - name: install ruby gems
   gem:
-    name: "{{ sensu_gems }}"
+    name: "{{ sensu_gem }}"
   become: yes
 
 - name: create install bin helper

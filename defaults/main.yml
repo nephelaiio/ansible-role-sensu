@@ -1,10 +1,13 @@
 ---
+ruby_packages:
+  - ruby
+  - ruby-dev
+
 sensu_server: false
 
 sensu_ssl: false
 
-sensu_gems:
-  - sensu
+sensu_gem: sensu
 
 sensu_user_name: sensu
 
