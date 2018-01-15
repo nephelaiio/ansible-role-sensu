@@ -1,7 +1,6 @@
 ---
 - name: reload systemd
   command: systemctl daemon-reload
-  become: yes
   tags:
     - skip_ansible_lint
 
@@ -9,14 +8,12 @@
   systemd:
     name: sensu-client
     state: restarted
-  become: yes
   when: not sensu_server
 
 - name: restart master service
   systemd:
     name: "{{ item }}"
     state: restarted
-  become: yes
   with_items:
     - sensu-api
     - sensu-server

@@ -11,31 +11,26 @@
     - "{{ sensu_conf_root }}"
     - "{{ sensu_conf_dir }}"
     - "{{ sensu_bin_dir }}"
-  become: yes
 
 - name: install ruby
   package:
     name: "{{ ruby_packages }}"
-  become: yes
 
 - name: install ruby gems
   gem:
     name: "{{ sensu_gem }}"
-  become: yes
 
 - name: create install bin helper
   template:
     src: sensu-install.j2
     dest: "{{ sensu_user_home }}/bin/sensu-install"
     mode: 0755
-  become: yes
 
 - name: create server bin helper
   template:
     src: sensu-service.j2
     dest: "{{ sensu_user_home }}/bin/sensu-service"
     mode: 0755
-  become: yes
 
 - name: create systemd client service units
   template:
@@ -45,7 +40,6 @@
     service: "{{ item }}"
   with_items:
     - client
-  become: yes
   when: not sensu_server
   notify: reload systemd
 
@@ -58,7 +52,6 @@
   with_items:
     - server
     - api
-  become: yes
   when: sensu_server
   notify: reload systemd
 
@@ -68,7 +61,6 @@
     dest: "{{ sensu_conf_dir }}/common.json"
   vars:
     sensu_conf: "{{ sensu_conf_common }}"
-  become: yes
   notify:
     - restart client service
     - restart master service
@@ -79,7 +71,6 @@
     dest: "{{ sensu_conf_dir }}/client.json"
   vars:
     sensu_conf: "{{ sensu_conf_client }}"
-  become: yes
   notify: restart client service
   when: not sensu_server
 
@@ -89,7 +80,6 @@
     dest: "{{ sensu_conf_dir }}/server.json"
   vars:
     sensu_conf: "{{ sensu_conf_server }}"
-  become: yes
   notify: restart master service
   when: sensu_server
 
@@ -99,7 +89,6 @@
     dest: "{{ sensu_conf_dir }}/checks.json"
   vars:
     sensu_conf: "{{ sensu_conf_checks }}"
-  become: yes
   notify:
     - restart master service
     - restart client service
@@ -110,14 +99,12 @@
     dest: /usr/lib/tmpfiles.d/sensu.conf
   vars:
     pid_dir: "{{ sensu_pid_dir }}"
-  become: yes
 
 - name: manage client service
   systemd:
     name: sensu-client
     state: "{{ sensu_service_state }}"
     enabled: "{{ sensu_service_enabled }}"
-  become: yes
   when: not sensu_server
 
 - name: manage master service
@@ -128,5 +115,4 @@
   with_items:
     - sensu-api
     - sensu-server
-  become: yes
   when: sensu_server
