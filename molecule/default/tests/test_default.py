@@ -10,7 +10,7 @@ ruby_bin = '/usr/local/bin/ruby'
 run_dir = '/var/run/sensu'
 
 
-def test_rbenv(host):
+def test_ruby(host):
     assert host.file(ruby_bin).exists
     assert host.file(ruby_bin).is_file
     host.run('{0} --version'.format(ruby_bin)).rc == 0
