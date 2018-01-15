@@ -10,6 +10,7 @@
     - "{{ sensu_log_dir }}"
     - "{{ sensu_conf_root }}"
     - "{{ sensu_conf_dir }}"
+    - "{{ sensu_bin_dir }}"
   become: yes
 
 - name: install ruby

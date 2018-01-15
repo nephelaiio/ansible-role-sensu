@@ -11,6 +11,8 @@ sensu_gem: sensu
 
 sensu_user_home: /opt/sensu
 
+sensu_bin_dir: "{{ sensu_user_home }}/bin"
+
 sensu_rabbitmq: true
 
 sensu_rabbitmq_host: localhost
