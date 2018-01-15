@@ -9,11 +9,7 @@ sensu_ssl: false
 
 sensu_gem: sensu
 
-sensu_user_name: sensu
-
 sensu_user_home: /opt/sensu
-
-sensu_user_group: root
 
 sensu_rabbitmq: true
 

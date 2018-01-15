@@ -59,7 +59,6 @@ HANDLERS_DIR=$CONFIG_DIR/handlers
 PID_DIR={{ sensu_pid_dir }}
 LOG_DIR={{ sensu_log_dir }}
 LOG_LEVEL={{ sensu_log_level }}
-USER={{ sensu_user_name }}
 
 if [ -f $ETC_DIR/default/sensu ]; then
     . $ETC_DIR/default/sensu
@@ -97,8 +96,6 @@ validate() {
 
 start() {
    set_sensu_paths
-   ensure_dir $PID_DIR $USER
-   ensure_dir $LOG_DIR $USER
    exec $svc_exec $options
 }
 

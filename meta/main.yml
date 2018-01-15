@@ -41,14 +41,3 @@ dependencies:
     when:
       - sensu_redis
       - sensu_server
-  - role: franklinkim.users
-    version: 1.9.1
-    become: yes
-    vars:
-      users:
-        - username: "{{ sensu_user_name }}"
-          home: "{{ sensu_user_home }}"
-          append: no
-          groups:
-            - "{{ sensu_user_group }}"
-          system: yes
