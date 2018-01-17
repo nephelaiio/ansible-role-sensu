@@ -17,7 +17,7 @@ def test_ruby(host):
 
 
 def test_sensu(host):
-    assert host.service('sensu-client').is_running
-    assert host.service('sensu-client').is_enabled
     assert host.file(run_dir).exists
     assert host.file(run_dir).is_directory
+    assert host.service('sensu-client').is_running
+    assert host.service('sensu-client').is_enabled

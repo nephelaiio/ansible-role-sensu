@@ -6,26 +6,13 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: debian
-    image: debian:stretch
-    privileged: True
-    command: /sbin/init
-    volume_mounts:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: local
 provisioner:
-  name: ansible
+  name: delegated
+  ansible_connection_options:
+    connection: local
   lint:
     name: ansible-lint
-  inventory:
-    host_vars:
-      arch:
-        sensu_server: true
-      centos:
-        sensu_server: true
-      debian:
-        sensu_server: true
-      ubuntu:
-        sensu_server: true
 scenario:
   name: server
 verifier:
