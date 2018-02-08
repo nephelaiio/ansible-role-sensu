@@ -19,6 +19,7 @@
 - name: install ruby gems
   gem:
     name: "{{ sensu_gem }}"
+    user_install: no
 
 - name: create install bin helper
   template:
