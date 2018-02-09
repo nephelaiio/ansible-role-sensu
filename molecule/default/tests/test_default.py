@@ -6,7 +6,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 user_home = '/opt/sensu'
-ruby_bin = '/usr/local/bin/ruby'
+ruby_bin = '/usr/bin/ruby'
 run_dir = '/var/run/sensu'
 
 

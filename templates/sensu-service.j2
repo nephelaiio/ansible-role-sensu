@@ -43,13 +43,15 @@ action=$1
 sensu_service=sensu-$2
 forking=$3
 
-ETC_DIR=/etc
-
-if is_freebsd; then
-  ETC_DIR=/usr/local/etc
+if [ "x$ETC_DIR" = "x" ]; then
+    if is_freebsd; then
+        ETC_DIR=/usr/local/etc
+    else
+        ETC_DIR=/etc
+    fi
 fi
 
-SENSU_HOME={{ sensu_user_home }}
+INSTALLER_DIR=/opt/sensu
 CONFIG_DIR=$ETC_DIR/sensu
 CONFIG_FILE=$CONFIG_DIR/config.json
 CONFD_DIR=$CONFIG_DIR/conf.d
@@ -60,11 +62,25 @@ PID_DIR={{ sensu_pid_dir }}
 LOG_DIR={{ sensu_log_dir }}
 LOG_LEVEL={{ sensu_log_level }}
 
+USER=sensu
+
+if [ -f $ETC_DIR/sysconfig/sensu ]; then
+    . $ETC_DIR/sysconfig/sensu
+fi
+
+if [ -f $ETC_DIR/sysconfig/$sensu_service ]; then
+    . $ETC_DIR/sysconfig/$sensu_service
+fi
+
 if [ -f $ETC_DIR/default/sensu ]; then
     . $ETC_DIR/default/sensu
 fi
 
-cd $SENSU_HOME
+if [ -f $ETC_DIR/default/$sensu_service ]; then
+    . $ETC_DIR/default/$sensu_service
+fi
+
+cd $INSTALLER_DIR
 
 svc_exec="/usr/local/bin/$sensu_service"
 
@@ -96,6 +112,8 @@ validate() {
 
 start() {
    set_sensu_paths
+   ensure_dir $PID_DIR $USER
+   ensure_dir $LOG_DIR $USER
    exec $svc_exec $options
 }
 

@@ -4,12 +4,13 @@ dependency:
 lint:
   name: yamllint
 platforms:
-  - name: local
+  - name: localhost
 driver:
   name: delegated
   options:
     managed: False
     ansible_connection_options:
+      ansible_connection: local
       connection: local
 provisioner:
   name: ansible

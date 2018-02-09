@@ -9,6 +9,10 @@ sensu_ssl: false
 
 sensu_gem: sensu
 
+sensu_service_user: sensu
+
+sensu_service_group: sensu
+
 sensu_user_home: /opt/sensu
 
 sensu_bin_dir: "{{ sensu_user_home }}/bin"

@@ -2,8 +2,8 @@
 Description=sensu {{ service }}
 
 [Service]
-User=sensu
-Group=sensu
+User={{ user }}
+Group={{ group }}
 ExecStart={{ sensu_user_home }}/bin/sensu-service start {{ service }}
 KillMode=process
 Restart=on-failure

@@ -39,6 +39,8 @@
     dest: "/etc/systemd/system/sensu-{{ service }}.service"
   vars:
     service: "{{ item }}"
+    user: "{{ sensu_service_user }}"
+    group: "{{ sensu_service_group }}"
   with_items:
     - client
   when: not sensu_server
@@ -50,6 +52,8 @@
     dest: "/etc/systemd/system/sensu-{{ service }}.service"
   vars:
     service: "{{ item }}"
+    user: "{{ sensu_service_user }}"
+    group: "{{ sensu_service_group }}"
   with_items:
     - server
     - api

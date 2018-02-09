@@ -21,10 +21,18 @@ galaxy_info:
     - sensu
 
 dependencies:
+  - role: franklinkim.users
+    version: 1.9.2
+    vars:
+      users:
+        - username: "{{ sensu_service_user }}"
+          name: sensu service user
+          system: yes
+      users_group: "{{ sensu_service_group }}"
   - role: nephelaiio.devtools
-    version: 1.0.6
+    version: 2.0.0
   - role: nephelaiio.rabbitmq
-    version: 1.0.2
+    version: 2.0.0
     vars:
       rabbitmq_vhost: "{{ sensu_rabbitmq_vhost }}"
       rabbitmq_user_name: "{{ sensu_rabbitmq_user_name }}"
