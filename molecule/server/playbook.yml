@@ -2,6 +2,7 @@
 - name: Converge
   hosts: localhost
   connection: local
+  become: yes
   vars:
     sensu_test: yes
   roles:

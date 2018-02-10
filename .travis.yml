@@ -15,7 +15,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - sudo molecule test -s default && sudo molecule test -s server
+  - molecule test -s default && molecule test -s server
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
