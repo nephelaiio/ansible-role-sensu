@@ -1,16 +1,25 @@
 ---
-- name: create sensu directories
+- name: create sensu binary directories
   file:
     state: directory
     path: "{{ item }}"
     mode: 0755
   with_items:
     - "{{ sensu_user_home }}"
+    - "{{ sensu_bin_dir }}"
+
+- name: create sensu user directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ sensu_service_user }}"
+    group: "{{ sensu_service_group }}"
+    recurse: true
+  with_items:
     - "{{ sensu_pid_dir }}"
     - "{{ sensu_log_dir }}"
     - "{{ sensu_conf_root }}"
     - "{{ sensu_conf_dir }}"
-    - "{{ sensu_bin_dir }}"
 
 - name: install ruby
   package:
