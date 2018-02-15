@@ -32,7 +32,7 @@ dependencies:
   - role: nephelaiio.devtools
     version: 2.0.0
   - role: nephelaiio.rabbitmq
-    version: 2.0.0
+    version: 2.0.1
     vars:
       rabbitmq_vhost: "{{ sensu_rabbitmq_vhost }}"
       rabbitmq_user_name: "{{ sensu_rabbitmq_user_name }}"
