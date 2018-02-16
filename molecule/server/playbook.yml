@@ -4,4 +4,4 @@
   vars:
     sensu_test: true
   roles:
-    - role: nfs
+    - role: sensu
