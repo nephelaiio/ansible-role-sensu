@@ -14,7 +14,6 @@
     path: "{{ item }}"
     owner: "{{ sensu_service_user }}"
     group: "{{ sensu_service_group }}"
-    recurse: true
   with_items:
     - "{{ sensu_pid_dir }}"
     - "{{ sensu_log_dir }}"
