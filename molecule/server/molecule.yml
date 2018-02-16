@@ -1,17 +1,17 @@
 ---
 dependency:
   name: galaxy
+driver:
+  name: docker
 lint:
   name: yamllint
 platforms:
-  - name: localhost
-driver:
-  name: delegated
-  options:
-    managed: False
-    ansible_connection_options:
-      ansible_connection: local
-      connection: local
+  - name: debian
+    image: debian:stretch
+    privileged: True
+    command: /sbin/init
+    volume_mounts:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
 provisioner:
   name: ansible
   lint:
