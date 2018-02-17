@@ -3,5 +3,6 @@
   hosts: all
   vars:
     sensu_test: true
+    sensu_server: true
   roles:
     - role: sensu
