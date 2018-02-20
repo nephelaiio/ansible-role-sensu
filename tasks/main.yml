@@ -14,6 +14,7 @@
     path: "{{ item }}"
     owner: "{{ sensu_service_user }}"
     group: "{{ sensu_service_group }}"
+    mode: 0750
   with_items:
     - "{{ sensu_pid_dir }}"
     - "{{ sensu_log_dir }}"
@@ -82,6 +83,9 @@
   template:
     src: conf.json.j2
     dest: "{{ sensu_conf_dir }}/client.json"
+    owner: "{{ sensu_service_user }}"
+    group: "{{ sensu_service_group }}"
+    mode: 0640
   vars:
     sensu_conf: "{{ sensu_conf_client }}"
   notify: restart client service
@@ -91,6 +95,9 @@
   template:
     src: conf.json.j2
     dest: "{{ sensu_conf_dir }}/server.json"
+    owner: "{{ sensu_service_user }}"
+    group: "{{ sensu_service_group }}"
+    mode: 0640
   vars:
     sensu_conf: "{{ sensu_conf_server }}"
   notify: restart master service
@@ -100,6 +107,9 @@
   template:
     src: conf.json.j2
     dest: "{{ sensu_conf_dir }}/checks.json"
+    owner: "{{ sensu_service_user }}"
+    group: "{{ sensu_service_group }}"
+    mode: 0640
   vars:
     sensu_conf: "{{ sensu_conf_checks }}"
   notify:
