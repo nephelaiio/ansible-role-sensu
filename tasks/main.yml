@@ -129,3 +129,5 @@
     - sensu-api
     - sensu-server
   when: sensu_server
+
+- meta: flush_handlers
