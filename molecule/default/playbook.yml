@@ -1,7 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  vars:
-    sensu_test: true
   roles:
     - role: sensu

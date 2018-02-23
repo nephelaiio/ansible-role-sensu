@@ -7,7 +7,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 def test_sensu(host):
-    assert host.service('sensu-server').is_running
     assert host.service('sensu-server').is_enabled
     assert host.service('sensu-api').is_running
     assert host.service('sensu-api').is_enabled

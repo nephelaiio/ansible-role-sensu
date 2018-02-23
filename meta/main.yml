@@ -37,11 +37,11 @@ dependencies:
       rabbitmq_vhost: "{{ sensu_rabbitmq_vhost }}"
       rabbitmq_user_name: "{{ sensu_rabbitmq_user_name }}"
       rabbitmq_user_pass: "{{ sensu_rabbitmq_user_pass }}"
-    when: (sensu_rabbitmq and sensu_server) or sensu_test
+    when: sensu_rabbitmq and sensu_server
   - role: geerlingguy.redis
     vars:
       redis_bind_interface: "{{ sensu_redis_host }}"
       redis_port: "{{ sensu_redis_port }}"
     version: 1.5.1
     become: yes
-    when: (sensu_rabbitmq and sensu_server) or sensu_test
+    when: sensu_rabbitmq and sensu_server
