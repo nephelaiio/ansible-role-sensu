@@ -6,7 +6,7 @@ User={{ user }}
 Group={{ group }}
 ExecStart={{ sensu_user_home }}/bin/sensu-service start {{ service }}
 KillMode=process
-Restart=on-failure
+Restart=no
 RestartSec=1min
 
 [Install]
