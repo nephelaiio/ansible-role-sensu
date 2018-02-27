@@ -122,6 +122,8 @@
     dest: /usr/lib/tmpfiles.d/sensu.conf
   vars:
     pid_dir: "{{ sensu_pid_dir }}"
+    sensu_user: "{{ sensu_service_user }}"
+    sensu_group: "{{ sensu_service_group }}"
 
 - name: manage client service
   systemd:
